@@ -1,0 +1,10 @@
+The mutex could have been placed anywhere inside of the compute function. The reason I put it around everything 
+inside the for loop is because I didn't want any of the global variables to get corrupted / edited incorrectly. Every time the for loop is run, I wanted the
+threads to not have access to the data while being edited to prevent corruption. I believe this method of unlocking and locking is the most
+effective in keeping the data safe. 
+
+An example: If I had put the mutexes around everything other than the variable f, the variable f would get corrupted because 
+the threads try to access it in the way that the operating system tells it to. The mutex pauses these threads. So, therefore, the mutex has to be around everything inside of the for loop.
+
+Another example: I could have put a lock on the outside (line 60) of the for loop but this would create problems because it allows the for loop
+to run and gives a chance for the threads to be run in such a way it corrupts the data. 
